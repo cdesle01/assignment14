@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" 
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+    crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>Stock Ticker</title>
+</head>
+<body>
+    
+    <script language="javascript">
+    
+    //setting the textboxes to not display right away
+    $(document).ready(function() {
+        document.getElementById("company").style.display = "none";
+        document.getElementById("stock").style.display = "none";
+        
+        //depending on which radio button is clicked, the corresponding
+        //text box will appear
+        $('input[type=radio][name=choose]').change(function() {
+            if (this.value == 'Company Name') {
+                document.getElementById("company").style.display = "inline";
+                document.getElementById("stock").style.display = "none";
+                document.getElementsByName("stock").value = "";
+            }
+            else if (this.value == 'Stock Ticker') {
+                document.getElementById("stock").style.display = "inline";
+                document.getElementById("company").style.display = "none";
+                document.getElementsByName("company").value = "";
+            }
+        });
+        
+    })
+    
+    </script>
+    
+    <!-- form which sends information to the localhost web page -->
+    <form method="post" action="http://localhost:8080/process">
+        <p>
+            <!-- creating the radio buttons -->
+            <input type="radio"  name="choose" value = "Company Name"/>
+            Company Name  
+            <input type="radio"  name='choose' value = 'Stock Ticker'/>
+            Stock Ticker
+        </p>
+        
+        <!-- creating the textboxes -->
+        <div id="company">
+            Company Name: <input type="text" name="company"><br><br>
+        </div>
+        
+        <div id="stock">
+            Stock Ticker: <input type="text" name="stock"><br><br>
+        </div>
+        
+        <!-- creating the submit button -->
+        <input type="submit" value="Submit">
+        
+    </form>
+    
+</body>
+</html>
